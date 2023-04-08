@@ -98,7 +98,6 @@ int main(void)
         // the LSB of state is 0 (while). If all bits are set, do nothing 
         do {
             state = ((state >> 1) | (state << 31));
-            // if ((state & 0xFFFFFFFF) == 0xFFFFFFFF) { break; } // Check if all bits are set
             if (state == 0xFFFFFFFF) { break; } // Check if all bits are set
         } while ((state & 0b1) != 0);
 
@@ -107,15 +106,16 @@ int main(void)
         uint16_t result = (state & LEAST_SIGNIFICANT_BYTES_MASK);
         printf("%04X ", result); 
 
+        // Declare variables to hold bits 11 to 4 and then
+        // isolate the most and least significant nibbles
+        // of this byte.
         uint8_t bits11To4 = ((state >> 4) & 0xff); 
         uint8_t msNibble = bits11To4 >> 4;
         uint8_t lsNibble = bits11To4 & 0xf;
 
-        // Inspect bits 11-4 of "state" and check if the most significant nibble
-        // of the byte (represented as a hexadecimal digit) matches the value stored in
-        // "STUDENT_NUMBER_2ND_LAST", if true print "foo." Else, check if the least significant
-        // nibble, represented as a hexadecimal digit, matches the value stored in 
-        // "STUDENT_NUMBER_LAST" and if true, print "bar." If both match, print "foobar."
+        // Commit yourself to an mental institution and spend the rest of your days
+        // trapped within your own mind until a time comes when this makes sense
+        // but it's too late for absolution.
         if (msNibble == STUDENT_NUMBER_2ND_LAST && lsNibble == STUDENT_NUMBER_LAST) {
             printf("%s%s", FOO, BAR);
         } else if (msNibble == STUDENT_NUMBER_2ND_LAST) {
